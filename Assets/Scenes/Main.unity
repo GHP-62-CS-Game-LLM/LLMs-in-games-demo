@@ -2326,7 +2326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   host: http://localhost:11434
-  model: deepseek-r1:1.5b
+  model: phi3:3.8b
 --- !u!4 &2068786073
 Transform:
   m_ObjectHideFlags: 0
