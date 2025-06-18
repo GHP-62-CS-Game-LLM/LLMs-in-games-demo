@@ -18,8 +18,7 @@ public class TalkingCube : MonoBehaviour
         Stopwatch stopwatch = new Stopwatch();
     
         stopwatch.Start();
-        await _conversation.Message("You are helpful talking cube assistant floating in space. A user will ask you a question. You must respond in the format SPEAK(\"[YOR MESSAGE]\")");
-        await _conversation.Message("USER: Hello!");
+        await _conversation.Message("USER: Hello! What's your name?");
         stopwatch.Stop();
         
         Debug.Log($"Conversation: {_conversation}");
