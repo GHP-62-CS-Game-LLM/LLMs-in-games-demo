@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class TalkingCube : MonoBehaviour
 {
     public LlmManager manager;
     public TextMeshProUGUI text;
+
+    public DialogueManager dm;
 
     private Conversation _conversation;
 
@@ -22,7 +25,8 @@ public class TalkingCube : MonoBehaviour
         stopwatch.Stop();
 
         Debug.Log($"Conversation: {_conversation}");
-        text.SetText($"Elapsed Time: {stopwatch.Elapsed}\nCube: {_conversation}");
+        //text.SetText($"Elapsed Time: {stopwatch.Elapsed}\nCube: {_conversation}");
+        dm.StartDialogue(_conversation.ToString());
         Debug.Log($"Elapsed Time: {stopwatch.Elapsed}");
     }
 }
