@@ -31,6 +31,6 @@ public class LlmManager : MonoBehaviour
         return sb.ToString();
     }
 
-    public Conversation MakeConversation(string context) => new Conversation(_ollama, "\n" + context);
+    public Conversation MakeConversation(string[] context) => new Conversation(_ollama, context);
     public Conversation MakeConversation() => new Conversation(_ollama);
 }
