@@ -7,8 +7,8 @@ public class TalkingCube : MonoBehaviour
 {
     public LlmManager manager;
     public TextMeshProUGUI text;
-
     private Conversation _conversation;
+    private ObjectContextWatcher _ocw;
 
     async void Start()
     {
@@ -25,4 +25,18 @@ public class TalkingCube : MonoBehaviour
         text.SetText($"Elapsed Time: {stopwatch.Elapsed}\nCube: {_conversation}");
         Debug.Log($"Elapsed Time: {stopwatch.Elapsed}");
     }
+
+    /* testing for context sys
+
+    void Awake()
+    {
+        _ocw = GetComponent<ObjectContextWatcher>();
+    }
+
+    void Update()
+    {
+        if (_ocw)
+            _ocw.SetContext(new string[] { "testing" });
+    }
+    */
 }
