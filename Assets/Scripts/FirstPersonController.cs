@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -14,6 +15,9 @@ public class FirstPersonController : MonoBehaviour
     public float lookSpeed = 1f;
     public float lookXLimit = 45f;
 
+    public float maxInteractDist = 2.5f;
+    private InputAction _interactAction;
+
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
@@ -25,6 +29,8 @@ public class FirstPersonController : MonoBehaviour
     characterController = GetComponent<CharacterController>();
     Cursor.lockState = CursorLockMode.Locked;
     Cursor.visible = false;
+
+    _interactAction = InputSystem.actions.FindAction("Interact");
 }
 
 void Update()
@@ -65,6 +71,21 @@ void Update()
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+    }
+    #endregion
+
+    #region Interact
+
+    bool canInteract = false;
+    if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.TransformDirection(Vector3.forward), out RaycastHit hit,
+            maxInteractDist))
+    {
+        canInteract = hit.collider.CompareTag("Interactable");
+    }
+    
+    if (_interactAction.IsPressed() && canInteract)
+    {
+        Debug.Log("Interacting!");
     }
     #endregion
 }
