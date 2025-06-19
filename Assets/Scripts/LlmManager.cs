@@ -8,6 +8,7 @@ using UnityEngine;
 public class LlmManager : MonoBehaviour
 {
     public string host = "http://localhost:11434";
+    public string globalContext = "";
     
     private readonly OllamaApiClient _ollama;
     private const string Model = "phi3:3.8b";
@@ -29,5 +30,6 @@ public class LlmManager : MonoBehaviour
         return sb.ToString();
     }
 
+    public Conversation MakeConversation(string context) => new Conversation(_ollama, globalContext + "\n" + context);
     public Conversation MakeConversation() => new Conversation(_ollama);
 }

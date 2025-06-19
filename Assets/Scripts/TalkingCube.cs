@@ -13,7 +13,7 @@ public class TalkingCube : MonoBehaviour
     async void Start()
     {
         Debug.Log("Starting Convo");
-        _conversation = manager.MakeConversation();
+        _conversation = manager.MakeConversation("You are Gregor, the blacksmith. Respond gruffly but honestly. You value hard work.");
 
         Stopwatch stopwatch = new Stopwatch();
     
