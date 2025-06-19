@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 198048877}
   m_Layer: 0
   m_Name: TalkingCube
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,7 +252,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 198048871}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.03
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 347849967}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -445,6 +445,7 @@ MonoBehaviour:
   gravity: 10
   lookSpeed: 2
   lookXLimit: 45
+  maxInteractDist: 2.5
   canMove: 1
 --- !u!143 &347849968
 CharacterController:
