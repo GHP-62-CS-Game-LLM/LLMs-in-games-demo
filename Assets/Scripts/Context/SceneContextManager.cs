@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class SceneContextManager : MonoBehaviour
 {
@@ -18,9 +17,5 @@ public class SceneContextManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-
-    }
-
+    public string[] GetContext(GameObject obj) => _sceneContext[obj];
 }
