@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OllamaSharp;
+using OllamaSharp.Models.Chat;
 
 public class Conversation
 {
@@ -39,15 +40,16 @@ public class Conversation
         });
     }
 
-    public IEnumerable<string> GetAllMessages() => _chat.Messages.Select(message => $"{message.Role}: {message.Content}");
+    public IEnumerable<string> GetAllMessagesStr() => _chat.Messages.Select(message => $"{message.Role}: {message.Content}");
+    public IEnumerable<Message> GetImportantMessages() => _chat.Messages.Where(message => message.Role != ChatRole.System);
 
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
 
-        foreach (string message in GetAllMessages())
+        foreach (Message message in GetImportantMessages())
         {
-            sb.Append(message);
+            sb.Append($"{message.Role}: {message.Content}");
             sb.Append("\n\n");
         }
 

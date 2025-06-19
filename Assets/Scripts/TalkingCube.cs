@@ -29,7 +29,7 @@ public class TalkingCube : MonoBehaviour
         {
             Debug.Log("Starting Convo");
             _stopwatch.Start();
-            _task = _conversation.Message("USER: Hello! What's your name?");
+            _task = _conversation.Message("Hello! What's your name?");
             _isStarted = true;
         }
 
