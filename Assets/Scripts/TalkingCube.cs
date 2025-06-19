@@ -38,7 +38,7 @@ public class TalkingCube : MonoBehaviour
             _stopwatch.Stop();
             Debug.Log($"Elapsed Time: {_stopwatch.Elapsed}");
             Debug.Log($"Conversation: {_conversation}");
-            //dm.StartDialogue(_conversation.ToString());
+            dm.StartDialogue(_conversation.ToString());
             _stopwatch.Reset();
             _isStarted = false;
         }
