@@ -6,13 +6,23 @@ using OllamaSharp;
 
 public class Conversation
 {
-    public readonly string Context;
+    public readonly string Context = "";
     
     private readonly Chat _chat;
 
-    public Conversation(OllamaApiClient ollama, string context = "")
+    public Conversation(OllamaApiClient ollama, string[] context = null)
     {
-        Context = context;
+        if (context is not null)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (string c in context)
+            {
+                sb.Append($"{c}\n");
+            }
+
+            Context = sb.ToString();
+        }
+        
         _chat = new Chat(ollama, Context);
     }
 

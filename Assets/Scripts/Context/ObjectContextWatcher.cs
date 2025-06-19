@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectContextWatcher : MonoBehaviour
@@ -20,5 +16,5 @@ public class ObjectContextWatcher : MonoBehaviour
         scm.SetContext(gameObject, _objectContext);
     }
 
-    
+    public string[] GetContext() => scm.GetContext(gameObject);
 }
