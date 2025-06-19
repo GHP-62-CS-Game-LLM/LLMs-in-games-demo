@@ -7,7 +7,6 @@ using Debug = UnityEngine.Debug;
 public class TalkingCube : MonoBehaviour
 {
     public LlmManager manager;
-    public TextMeshProUGUI text;
 
     public DialogueManager dm;
 
@@ -25,7 +24,6 @@ public class TalkingCube : MonoBehaviour
         stopwatch.Stop();
 
         Debug.Log($"Conversation: {_conversation}");
-        //text.SetText($"Elapsed Time: {stopwatch.Elapsed}\nCube: {_conversation}");
         dm.StartDialogue(_conversation.ToString());
         Debug.Log($"Elapsed Time: {stopwatch.Elapsed}");
     }
