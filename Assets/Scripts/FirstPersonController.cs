@@ -11,7 +11,7 @@ public class FirstPersonController : MonoBehaviour
     public float runSpeed = 12f;
     public float jumpPower = 5f;
     public float gravity = 10f;
-    public float lookSpeed = 1f;
+    public float lookSpeed = 4f;
     public float lookXLimit = 45f;
 
     Vector3 moveDirection = Vector3.zero;
