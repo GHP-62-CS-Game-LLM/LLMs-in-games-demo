@@ -35,7 +35,6 @@ public class Conversation
         {
             sb.Append(message);
             sb.Append("\n\n");
-
         }
 
         return sb.ToString();
