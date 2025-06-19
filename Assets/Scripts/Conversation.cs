@@ -13,7 +13,7 @@ public class Conversation
         _chat = new Chat(ollama);
         _chat.Think = false;
     }
-    
+
     public async Task<string> Message(string prompt)
     {
         StringBuilder sb = new StringBuilder();
@@ -33,6 +33,7 @@ public class Conversation
         {
             sb.Append(message);
             sb.Append("\n\n");
+
         }
 
         return sb.ToString();
