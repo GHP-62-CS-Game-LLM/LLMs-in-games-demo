@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,11 +29,14 @@ public class Conversation
 
     public async Task<string> Message(string prompt)
     {
-        StringBuilder sb = new StringBuilder();
-        IAsyncEnumerable<string> response = _chat.SendAsync(prompt);
-        await foreach (string token in response) sb.Append(token);
+        return await Task.Run(async () =>
+        {
+            StringBuilder sb = new StringBuilder();
+            IAsyncEnumerable<string> response = _chat.SendAsync(prompt);
+            await foreach (string token in response) sb.Append("Hello");
 
-        return sb.ToString();
+            return sb.ToString();
+        });
     }
 
     public IEnumerable<string> GetAllMessages() => _chat.Messages.Select(message => $"{message.Role}: {message.Content}");
