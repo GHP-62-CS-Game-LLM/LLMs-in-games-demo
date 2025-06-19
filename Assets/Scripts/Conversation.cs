@@ -6,12 +6,11 @@ using OllamaSharp;
 
 public class Conversation
 {
-    private Chat _chat;
+    private readonly Chat _chat;
 
     public Conversation(OllamaApiClient ollama)
     {
-        _chat = new Chat(ollama);
-        _chat.Think = false;
+        _chat = new Chat(ollama, "You are Gregor, the blacksmith. Respond gruffly but honestly. You value hard work.");
     }
 
     public async Task<string> Message(string prompt)
