@@ -22,7 +22,7 @@ public class TalkingCube : MonoBehaviour
         stopwatch.Stop();
 
         Debug.Log($"Conversation:\n{_conversation}");
-        text.SetText($"Elapsed Time: {stopwatch.Elapsed}\nCube: {_conversation}");
+        text.SetText($"Elapsed Time: {stopwatch.Elapsed}\nCube:\n{_conversation}");
         Debug.Log($"Elapsed Time: {stopwatch.Elapsed}");
     }
 
