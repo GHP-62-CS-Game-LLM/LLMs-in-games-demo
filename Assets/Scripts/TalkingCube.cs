@@ -21,7 +21,7 @@ public class TalkingCube : MonoBehaviour
         await _conversation.Message("USER: Hello! What's your name?");
         stopwatch.Stop();
 
-        Debug.Log($"Conversation: {_conversation}");
+        Debug.Log($"Conversation:\n{_conversation}");
         text.SetText($"Elapsed Time: {stopwatch.Elapsed}\nCube: {_conversation}");
         Debug.Log($"Elapsed Time: {stopwatch.Elapsed}");
     }
