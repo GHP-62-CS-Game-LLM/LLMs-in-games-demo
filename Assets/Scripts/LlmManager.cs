@@ -8,14 +8,14 @@ using UnityEngine;
 public class LlmManager : MonoBehaviour
 {
     public string host = "http://localhost:11434";
-    public string model = "deepseek-r1:1.5b";
     
-    private OllamaApiClient _ollama;
+    private readonly OllamaApiClient _ollama;
+    private const string Model = "phi3:3.8b";
 
     public LlmManager()
     {
         _ollama = new OllamaApiClient(new Uri(host));
-        _ollama.SelectedModel = model;
+        _ollama.SelectedModel = Model;
     }
 
     public async Task<string> Message(string prompt)
