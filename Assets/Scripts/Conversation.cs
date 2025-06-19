@@ -15,7 +15,7 @@ public class Conversation
         Context = context;
         _chat = new Chat(ollama, Context);
     }
-    
+
     public async Task<string> Message(string prompt)
     {
         StringBuilder sb = new StringBuilder();
@@ -35,6 +35,7 @@ public class Conversation
         {
             sb.Append(message);
             sb.Append("\n\n");
+
         }
 
         return sb.ToString();
