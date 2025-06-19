@@ -8,7 +8,7 @@
 Builds/
 .idea/
 .utmp/
-ProjectSettings/Packages/com.unity.probuilder/Settings.json
+# ProjectSettings/Packages/com.unity.probuilder/Settings.json
 
 /[Ll]ibrary/
 /[Tt]emp/
