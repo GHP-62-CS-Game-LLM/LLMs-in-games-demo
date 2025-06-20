@@ -1,0 +1,3 @@
+[submodule "Assets/CSky-Dynamic-Sky"]
+	path = Assets/CSky-Dynamic-Sky
+	url = https://github.com/bmjoy/CSky-Dynamic-Sky-Unity
