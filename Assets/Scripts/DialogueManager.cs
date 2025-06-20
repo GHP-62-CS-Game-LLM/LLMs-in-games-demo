@@ -10,7 +10,6 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public string text;
     public float textSpeed;
-    private int index;
 
     void Start()
     {
@@ -34,7 +33,6 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(string msg)
     {
         Reset();
-        index = 0;
 
         text = msg;
         StartCoroutine(TypeDialogue(msg));
