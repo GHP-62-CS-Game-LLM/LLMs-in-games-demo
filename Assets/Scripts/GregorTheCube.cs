@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(ObjectContextWatcher))]
+
 public class GregorTheCube : MonoBehaviour
 {
     private ObjectContextWatcher _contextWatcher;

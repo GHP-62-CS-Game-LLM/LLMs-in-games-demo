@@ -16,5 +16,5 @@ public class ObjectContextWatcher : MonoBehaviour
         scm.SetContext(gameObject, _objectContext);
     }
 
-    public string[] GetContext() => scm.GetContext(gameObject);
+    public string GetContext() => scm.GetContext(gameObject);
 }

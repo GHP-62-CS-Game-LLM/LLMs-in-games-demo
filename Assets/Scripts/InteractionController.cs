@@ -38,10 +38,11 @@ public class InteractionController : MonoBehaviour
         if (_interactAction.WasPressedThisFrame() && canInteract)
         {
             Debug.Log("Interacting!");
-            string[] context = hit.collider.gameObject.GetComponent<ObjectContextWatcher>().GetContext();
+            string context = hit.collider.gameObject.GetComponent<ObjectContextWatcher>().GetContext();
             _currentConversation = manager.MakeConversation(context);
             _stopwatch.Restart();
-            _conversationTask = _currentConversation.Message("Hello! What's your name?");
+            //_conversationTask = _currentConversation.Message("Hello! How are you doing today?");
+            _conversationTask = _currentConversation.Message("Hello! Can you tell me around what time of day it is?");
         }
 
         if (_conversationTask is { IsCompleted: true } && _currentConversation != null)
