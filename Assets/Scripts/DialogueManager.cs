@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Internal.Commands;
 using TMPro;
 using UnityEngine;
 
@@ -24,8 +26,14 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        textComponent.text = string.Empty;
+    }
+
     public void StartDialogue(string msg)
     {
+        Reset();
         index = 0;
 
         text = msg;
