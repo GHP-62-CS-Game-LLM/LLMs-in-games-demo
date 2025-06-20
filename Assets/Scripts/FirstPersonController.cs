@@ -15,9 +15,6 @@ public class FirstPersonController : MonoBehaviour
     public float lookSpeed = 4f;
     public float lookXLimit = 45f;
 
-    public float maxInteractDist = 2.5f;
-    private InputAction _interactAction;
-
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
@@ -25,68 +22,51 @@ public class FirstPersonController : MonoBehaviour
     CharacterController characterController;
 
     void Start()
-{
-    characterController = GetComponent<CharacterController>();
-    Cursor.lockState = CursorLockMode.Locked;
-    Cursor.visible = false;
-
-    _interactAction = InputSystem.actions.FindAction("Interact");
-}
-
-void Update()
-{
-    #region Movement
-    Vector3 forward = transform.TransformDirection(Vector3.forward);
-    Vector3 right = transform.TransformDirection(Vector3.right);
-
-    bool isRunning = Input.GetKey(KeyCode.LeftShift);
-    float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
-    float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
-    float moveDirectionY = moveDirection.y;
-    moveDirection = (forward * curSpeedX) + (right * curSpeedY);
-    #endregion
-
-    #region Jump
-    if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
     {
-        moveDirection.y = jumpPower;
-    }
-    else
-    {
-        moveDirection.y = moveDirectionY;
+        characterController = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    if (!characterController.isGrounded)
+    void Update()
     {
-        moveDirection.y -= gravity * Time.deltaTime;
-    }
-    #endregion
+        #region Movement
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 right = transform.TransformDirection(Vector3.right);
 
-    #region Rotate
-    characterController.Move(moveDirection * Time.deltaTime);
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
+        float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
+        float moveDirectionY = moveDirection.y;
+        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        #endregion
 
-    if (canMove)
-    {
-        rotationX -= Input.GetAxis("Mouse Y") * lookSpeed;
-        rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
-    }
-    #endregion
+        #region Jump
+        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        {
+            moveDirection.y = jumpPower;
+        }
+        else
+        {
+            moveDirection.y = moveDirectionY;
+        }
 
-    #region Interact
+        if (!characterController.isGrounded)
+        {
+            moveDirection.y -= gravity * Time.deltaTime;
+        }
+        #endregion
 
-    bool canInteract = false;
-    if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.TransformDirection(Vector3.forward), out RaycastHit hit,
-            maxInteractDist))
-    {
-        canInteract = hit.collider.CompareTag("Interactable");
+        #region Rotate
+        characterController.Move(moveDirection * Time.deltaTime);
+
+        if (canMove)
+        {
+            rotationX -= Input.GetAxis("Mouse Y") * lookSpeed;
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
+        #endregion
     }
-    
-    if (_interactAction.IsPressed() && canInteract)
-    {
-        Debug.Log("Interacting!");
-    }
-    #endregion
-}
 }
