@@ -650,9 +650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4e71553094a44c7b360544aec952e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 252907465}
-  contextWatcher: {fileID: 649647768}
-  dm: {fileID: 832118934}
 --- !u!1 &832118933
 GameObject:
   m_ObjectHideFlags: 0
@@ -3065,6 +3062,7 @@ GameObject:
   - component: {fileID: 1907560926}
   - component: {fileID: 1907560924}
   - component: {fileID: 1907560923}
+  - component: {fileID: 1907560929}
   m_Layer: 0
   m_Name: GabeTheCube
   m_TagString: Interactable
@@ -3200,6 +3198,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907560921}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1907560929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907560921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9bf96d162264a4da1df53430bc5ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1995374475
 GameObject:
   m_ObjectHideFlags: 0
