@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.92818284, g: 0.9813845, b: 0.9825951, a: 2}
   m_FogMode: 2
-  m_FogDensity: 0.01
+  m_FogDensity: 0.002
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 86309534}
   - component: {fileID: 86309539}
   - component: {fileID: 86309538}
+  - component: {fileID: 86309540}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Interactable
@@ -352,6 +353,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a4e71553094a44c7b360544aec952e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &86309540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86309533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41b7702be15c43b7a88caf6177f2cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &187213948
@@ -1581,7 +1594,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 5
     m_NumAlphaKeys: 2
-  m_UnityFogDensity: 0.01
+  m_UnityFogDensity: 0.002
   m_UnityFogStartDistance: 0
   m_UnityFogEndDistance: 300
 --- !u!4 &859994069
