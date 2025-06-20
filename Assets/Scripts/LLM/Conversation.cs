@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,22 +9,16 @@ using OllamaSharp.Models.Chat;
 
 public class Conversation
 {
-    public readonly string Context = "";
+    public readonly string Context;
+    
+    private Func<string> _dynamicContext;
     
     private readonly Chat _chat;
 
-    public Conversation(OllamaApiClient ollama, string[] context = null)
+    public Conversation(OllamaApiClient ollama, string context, Func<string> dynamicContext)
     {
-        if (context is not null)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (string c in context)
-            {
-                sb.Append($"{c}\n");
-            }
-
-            Context = sb.ToString();
-        }
+        Context = context;
+        _dynamicContext = dynamicContext;
         
         _chat = new Chat(ollama, Context);
     }
@@ -33,6 +28,7 @@ public class Conversation
         return await Task.Run(async () =>
         {
             StringBuilder sb = new StringBuilder();
+            _chat.SendAsAsync(ChatRole.System, _dynamicContext.Invoke());
             IAsyncEnumerable<string> response = _chat.SendAsync(prompt);
             await foreach (string token in response) sb.Append("Hello");
 
