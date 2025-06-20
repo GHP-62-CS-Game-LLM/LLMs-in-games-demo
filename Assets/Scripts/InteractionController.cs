@@ -18,7 +18,6 @@ public class InteractionController : MonoBehaviour
     private Stopwatch _stopwatch = new Stopwatch();
 
     private Task<string>? _conversationTask = null;
-    [CanBeNull]
     private Conversation _currentConversation;
 
     private void Start()
