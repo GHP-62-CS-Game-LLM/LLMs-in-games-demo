@@ -11,6 +11,9 @@ public class InteractionController : MonoBehaviour
     public FirstPersonController fpc;
 
     public Camera playerCamera;
+
+    public GameObject interactText;
+    public GameObject dialougePanel;
     
     public float maxInteractDist = 2.5f;
     private InputAction _interactAction;
@@ -35,11 +38,14 @@ public class InteractionController : MonoBehaviour
         {
             canInteract = hit.collider.CompareTag("Interactable");
         }
+        
+        interactText.SetActive(canInteract && !_isInteracting);
     
         if (_interactAction.WasPressedThisFrame() && canInteract)
         {
             Debug.Log("Interacting!");
             _isInteracting = true;
+            dialougePanel.SetActive(true);
             fpc.canMove = false;
             string context = hit.collider.gameObject.GetComponent<ObjectContextWatcher>().GetContext();
             _currentConversation = manager.MakeConversation(context);
