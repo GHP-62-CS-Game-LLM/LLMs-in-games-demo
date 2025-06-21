@@ -16,11 +16,14 @@ public class FirstPersonController : MonoBehaviour
     float rotationX = 0;
 
     public bool canMove = true;
+    public bool canLook = true;
     CharacterController characterController;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        characterController.detectCollisions = true;
+        characterController.contactOffset = 0.5f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -57,7 +60,7 @@ public class FirstPersonController : MonoBehaviour
         #region Rotate
         characterController.Move(moveDirection * Time.deltaTime);
 
-        if (canMove)
+        if (canLook)
         {
             rotationX -= Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
