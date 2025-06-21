@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
@@ -9,6 +8,7 @@ public class InteractionController : MonoBehaviour
 {
     public LlmManager manager;
     public DialogueManager dm;
+    public FirstPersonController fpc;
 
     public Camera playerCamera;
     
@@ -17,8 +17,10 @@ public class InteractionController : MonoBehaviour
 
     private Stopwatch _stopwatch = new Stopwatch();
 
-    private Task<string>? _conversationTask = null;
+    private Task<string> _conversationTask;
     private Conversation _currentConversation;
+
+    private bool _isInteracting = false;
 
     private void Start()
     {
@@ -37,6 +39,8 @@ public class InteractionController : MonoBehaviour
         if (_interactAction.WasPressedThisFrame() && canInteract)
         {
             Debug.Log("Interacting!");
+            _isInteracting = true;
+            fpc.canMove = false;
             string context = hit.collider.gameObject.GetComponent<ObjectContextWatcher>().GetContext();
             _currentConversation = manager.MakeConversation(context);
             _stopwatch.Restart();
@@ -46,6 +50,9 @@ public class InteractionController : MonoBehaviour
 
         if (_conversationTask is { IsCompleted: true } && _currentConversation != null)
         {
+            _isInteracting = false;
+            fpc.canMove = true;
+            
             _stopwatch.Stop();
             Debug.Log($"Elapsed Time: {_stopwatch.Elapsed}");
             Debug.Log($"Conversation: {_currentConversation}");

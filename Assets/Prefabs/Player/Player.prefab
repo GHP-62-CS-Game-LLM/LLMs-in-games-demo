@@ -329,6 +329,7 @@ MonoBehaviour:
   lookSpeed: 1
   lookXLimit: 85
   canMove: 1
+  canLook: 1
 --- !u!114 &8917641226353188077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,5 +356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
   dm: {fileID: 0}
+  fpc: {fileID: 514699012003416195}
   playerCamera: {fileID: 3467774569193740389}
   maxInteractDist: 2.5
