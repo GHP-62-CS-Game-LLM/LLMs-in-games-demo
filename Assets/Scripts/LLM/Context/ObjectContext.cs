@@ -1,16 +1,21 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
+
+public enum ObjectType
+{
+    /** This object's context will automatically be added to the global context */
+    Generic,
+    /** Context for interactable NPCs */
+    NPC
+}
 
 public interface IContext
 {
     public string Type { get; }
     
     public void WriteJson(Utf8JsonWriter writer);
-    
 }
 
 public class ObjectKinematicContext : IContext

@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class ObjectContextWatcher : MonoBehaviour
 {
-    public bool enablePositionTracking = false;
+    public ObjectType type = ObjectType.Generic;
+    
+    public bool trackKinematics = false;
 
-    public string name = "";
+    public new string name = "";
     public string description = "";
     
     private ObjectContext _objectContext;
@@ -16,14 +18,23 @@ public class ObjectContextWatcher : MonoBehaviour
         {
             Name = name, 
             Description = description, 
-            ObjectKinematic = enablePositionTracking ? 
+            ObjectKinematic = trackKinematics ? 
                 new ObjectKinematicContext(transform, GetComponent<Rigidbody>()) : 
                 null
         };
         
         _scm = FindAnyObjectByType<SceneContextManager>();
-        
-        _scm.SetContext(gameObject, _objectContext);
+
+        switch (type)
+        {
+        case ObjectType.Generic:
+           
+            break;
+        case ObjectType.NPC:
+            _scm.SetContext(gameObject, _objectContext);
+            
+            break;
+        }
     }
 
     // public void SetContext(string[] cont)
