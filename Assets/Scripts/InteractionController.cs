@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
@@ -14,9 +16,10 @@ public class InteractionController : MonoBehaviour
 
     public GameObject interactText;
     public GameObject dialougePanel;
-    
+
     public float maxInteractDist = 2.5f;
     private InputAction _interactAction;
+    public GameObject inputPanel;
 
     private Stopwatch _stopwatch = new Stopwatch();
 
@@ -38,15 +41,17 @@ public class InteractionController : MonoBehaviour
         {
             canInteract = hit.collider.CompareTag("Interactable");
         }
-        
+
         interactText.SetActive(canInteract && !_isInteracting);
-    
+
         if (_interactAction.WasPressedThisFrame() && canInteract)
         {
             Debug.Log("Interacting!");
             _isInteracting = true;
             dialougePanel.SetActive(true);
+            inputPanel.SetActive(true);
             fpc.canMove = false;
+            fpc.Unlock();
             string context = hit.collider.gameObject.GetComponent<ObjectContextWatcher>().GetContext();
             _currentConversation = manager.MakeConversation(context);
             _stopwatch.Restart();
@@ -58,12 +63,19 @@ public class InteractionController : MonoBehaviour
         {
             _isInteracting = false;
             fpc.canMove = true;
-            
+            fpc.Lock();
+            dialougePanel.SetActive(false);
+            inputPanel.SetActive(false);
+
             _stopwatch.Stop();
             Debug.Log($"Elapsed Time: {_stopwatch.Elapsed}");
             Debug.Log($"Conversation: {_currentConversation}");
-            dm.StartDialogue(_currentConversation.ToString());
+            dm.StartDialogue(_currentConversation.GetImportantMessages());
             _conversationTask = null;
         }
+    }
+    public Conversation GetConversation()
+    {
+        return _currentConversation;
     }
 }

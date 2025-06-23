@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 [RequireComponent(typeof(ObjectContextWatcher))]
 
@@ -9,11 +10,15 @@ public class GregorTheCube : MonoBehaviour
     private ObjectContextWatcher _contextWatcher;
     private Conversation _conversation;
     public TMP_InputField input;
+    public InteractionController controller;
+    public DialogueManager dm;
+
 
 
     private void Awake()
     {
         _contextWatcher = GetComponent<ObjectContextWatcher>();
+        _conversation = controller.GetConversation();
     }
 
     void Start()
@@ -24,9 +29,13 @@ public class GregorTheCube : MonoBehaviour
 
     async void Submit(string submittedText)
     {
+        _conversation = controller.GetConversation();
         if (!string.IsNullOrEmpty(submittedText))
         {
+            Debug.Log(_conversation.ToString());
             await _conversation.Message(submittedText);
+            dm.StartDialogue(_conversation.GetImportantMessages());
+            Debug.Log(_conversation.ToString());
         }
     }
 }

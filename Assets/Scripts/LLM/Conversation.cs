@@ -10,16 +10,16 @@ using OllamaSharp.Models.Chat;
 public class Conversation
 {
     public readonly string Context;
-    
+
     private Func<string> _dynamicContext;
-    
+
     private readonly Chat _chat;
 
     public Conversation(OllamaApiClient ollama, string context, Func<string> dynamicContext)
     {
         Context = context;
         _dynamicContext = dynamicContext;
-        
+
         _chat = new Chat(ollama, Context);
     }
 
@@ -30,7 +30,7 @@ public class Conversation
             StringBuilder sb = new StringBuilder();
             _chat.SendAsAsync(ChatRole.System, _dynamicContext.Invoke());
             IAsyncEnumerable<string> response = _chat.SendAsync(prompt);
-            await foreach (string token in response) sb.Append("Hello");
+            await foreach (string token in response) sb.Append(token);
 
             return sb.ToString();
         });

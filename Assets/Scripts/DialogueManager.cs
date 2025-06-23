@@ -4,12 +4,21 @@ using System.Collections.Generic;
 using NUnit.Framework.Internal.Commands;
 using TMPro;
 using UnityEngine;
+using System.Threading.Tasks;
+using UnityEngine.Rendering.HighDefinition;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using OllamaSharp;
+using OllamaSharp.Models.Chat;
 
 public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string text;
     public float textSpeed;
+
+
 
     void Start()
     {
@@ -30,20 +39,24 @@ public class DialogueManager : MonoBehaviour
         textComponent.text = string.Empty;
     }
 
-    public void StartDialogue(string msg)
+    public void StartDialogue(IEnumerable<Message> msg)
     {
         Reset();
-
-        text = msg;
         StartCoroutine(TypeDialogue(msg));
 
     }
-    public IEnumerator TypeDialogue(string msg)
+    public IEnumerator TypeDialogue(IEnumerable<Message> msg)
     {
-        foreach (char c in msg.ToCharArray())
+        foreach (Message m in msg)
         {
-            textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            string mMsg = m.Content;
+            foreach (char c in mMsg.ToCharArray())
+            {
+                textComponent.text += c;
+                yield return new WaitForSeconds(textSpeed);
+            }
+            textComponent.text += "\n";
         }
+
     }
 }

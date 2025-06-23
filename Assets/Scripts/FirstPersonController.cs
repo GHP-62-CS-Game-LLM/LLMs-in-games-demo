@@ -17,6 +17,7 @@ public class FirstPersonController : MonoBehaviour
 
     public bool canMove = true;
     public bool canLook = true;
+    public bool locked = true;
     CharacterController characterController;
 
     void Start()
@@ -69,16 +70,33 @@ public class FirstPersonController : MonoBehaviour
         }
         #endregion
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (locked == false)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else if (Input.GetKey(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
 
-        if (Input.GetMouseButtonDown(0) && Cursor.visible)
+        else if (Input.GetMouseButtonDown(0) && Cursor.visible)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
     }
+
+    public void Lock()
+    {
+        //canLook = false;
+    }
+
+    public void Unlock()
+    {
+        locked = false;
+        Debug.Log("Unlocked");
+    }
 }
+
