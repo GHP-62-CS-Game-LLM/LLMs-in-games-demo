@@ -10,7 +10,7 @@ public class SceneContextManager : MonoBehaviour
     private Dictionary<GameObject, IContext> _sceneContext = new Dictionary<GameObject, IContext>();
 
     public List<string> globalContext = new List<string>();
-    private List<Func<string>> _dynamicContex = new List<Func<string>>();
+    private List<Func<IContext>> _dynamicContex = new List<Func<IContext>>();
 
     public void SetContext(GameObject obj, IContext context)
     {
@@ -28,15 +28,11 @@ public class SceneContextManager : MonoBehaviour
     {
         StringBuilder sb = new StringBuilder();
 
+        sb.AppendLine("Global Context: ");
         foreach (string context in globalContext) sb.AppendLine(context);
-        foreach (Func<string> context in _dynamicContex) sb.AppendLine(context.Invoke());
-        
-        MemoryStream stream = new MemoryStream();
-        Utf8JsonWriter writer = new Utf8JsonWriter(stream);
-        _sceneContext[obj].WriteJson(writer);
-        writer.Flush();
-        string jsonString = Encoding.UTF8.GetString(stream.ToArray());
-        sb.AppendLine(jsonString);
+        foreach (Func<IContext> context in _dynamicContex) AddContext(sb, context);
+        sb.AppendLine("Object-Specific Context:");
+        AddContext(sb, () => _sceneContext[obj]);
 
         return sb.ToString();
     }
@@ -54,7 +50,7 @@ public class SceneContextManager : MonoBehaviour
         globalContext.Add(context);
     }
 
-    public void AddToDyanmicContext(Func<string> context)
+    public void AddToDynamicContext(Func<IContext> context)
     {
         _dynamicContex.Add(context);
     }
@@ -63,8 +59,20 @@ public class SceneContextManager : MonoBehaviour
     {
         StringBuilder sb = new StringBuilder();
 
-        foreach (Func<string> func in _dynamicContex) sb.AppendLine(func.Invoke());
+        foreach (Func<IContext> func in _dynamicContex) AddContext(sb, func);
         
         return sb.ToString();
+    }
+
+    private static void AddContext(StringBuilder sb, Func<IContext> context)
+    {
+        MemoryStream stream = new MemoryStream();
+        Utf8JsonWriter writer = new Utf8JsonWriter(stream);
+        
+        context.Invoke().WriteJson(writer);
+        writer.Flush();
+        
+        string jsonString = Encoding.UTF8.GetString(stream.ToArray());
+        sb.AppendLine(jsonString);
     }
 }
