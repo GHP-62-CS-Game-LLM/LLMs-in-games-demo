@@ -11,11 +11,13 @@ using System.Linq;
 using System.Text;
 using OllamaSharp;
 using OllamaSharp.Models.Chat;
+using System.Linq;
 
 public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string text;
+    public string newText;
     public float textSpeed;
 
 
@@ -36,27 +38,44 @@ public class DialogueManager : MonoBehaviour
 
     public void Reset()
     {
-        textComponent.text = string.Empty;
+        textComponent.text = text;
     }
 
     public void StartDialogue(IEnumerable<Message> msg)
     {
         Reset();
-        StartCoroutine(TypeDialogue(msg));
-
+        List<Message> msgList = new List<Message>
+        {
+            msg.ElementAt(msg.Count() - 2),
+            msg.ElementAt(msg.Count() - 1)
+        };
+        IEnumerable<Message> newMessages = msgList;
+        StartCoroutine(TypeDialogue(newMessages));
     }
     public IEnumerator TypeDialogue(IEnumerable<Message> msg)
     {
+        newText = FullString(msg);
         foreach (Message m in msg)
         {
             string mMsg = m.Content;
+            textComponent.text += m.Role.ToString() + ": ";
             foreach (char c in mMsg.ToCharArray())
             {
                 textComponent.text += c;
                 yield return new WaitForSeconds(textSpeed);
             }
-            textComponent.text += "\n";
+            textComponent.text += "\n\n";
+        }
+        text = text + newText;
+    }
+    string FullString(IEnumerable<Message> msg)
+    {
+        string finalMsg = "";
+        foreach (Message m in msg)
+        {
+            finalMsg += m.Role.ToString() + ": " + m.Content + "\n\n";
         }
 
+        return finalMsg;
     }
 }

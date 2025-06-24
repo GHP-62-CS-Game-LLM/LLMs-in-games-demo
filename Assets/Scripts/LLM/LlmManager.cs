@@ -5,14 +5,20 @@ using System.Threading.Tasks;
 using OllamaSharp;
 using UnityEngine;
 
+/*
+- Make text not restart every prompt
+- Fix horizontal Scroll Bar
+- 
+*/
+
 public class LlmManager : MonoBehaviour
 {
-    public string host = "http://localhost:11434";
+    public string host = "http://10.40.96.252:8080";
 
     public SceneContextManager scm;
-    
+
     private readonly OllamaApiClient _ollama;
-    private const string Model = "phi3:3.8b";
+    private const string Model = "phi4-mini";
 
     public LlmManager()
     {

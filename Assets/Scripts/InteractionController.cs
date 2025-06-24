@@ -64,8 +64,8 @@ public class InteractionController : MonoBehaviour
             _isInteracting = false;
             fpc.canMove = true;
             fpc.Lock();
-            dialougePanel.SetActive(false);
-            inputPanel.SetActive(false);
+            //dialougePanel.SetActive(false);
+            //inputPanel.SetActive(false);
 
             _stopwatch.Stop();
             Debug.Log($"Elapsed Time: {_stopwatch.Elapsed}");
