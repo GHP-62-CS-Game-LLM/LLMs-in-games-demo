@@ -30,7 +30,7 @@ public class Conversation
             StringBuilder sb = new StringBuilder();
             _chat.SendAsAsync(ChatRole.System, _dynamicContext.Invoke());
             IAsyncEnumerable<string> response = _chat.SendAsync(prompt);
-            await foreach (string token in response) sb.Append("Hello");
+            await foreach (string token in response) sb.Append(token);
 
             return sb.ToString();
         });

@@ -49,7 +49,7 @@ public class InteractionController : MonoBehaviour
             _currentConversation = manager.MakeConversation(context);
             _stopwatch.Restart();
             //_conversationTask = _currentConversation.Message("Hello! How are you doing today?");
-            _conversationTask = _currentConversation.Message("Hello! Can you tell me around what time of day it is?");
+            _conversationTask = _currentConversation.Message("Hello! About what time of day is it?");
         }
 
         if (_conversationTask is { IsCompleted: true } && _currentConversation != null)

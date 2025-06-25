@@ -217,11 +217,10 @@ GameObject:
   - component: {fileID: 86309536}
   - component: {fileID: 86309535}
   - component: {fileID: 86309534}
-  - component: {fileID: 86309539}
   - component: {fileID: 86309538}
   - component: {fileID: 86309540}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: GregorTheCube
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,13 +308,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86309533}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 160.173, y: 5.321, z: 155.74}
+  m_LocalRotation: {x: 0.005209596, y: -0.92459875, z: 0.34784028, w: 0.1552324}
+  m_LocalPosition: {x: 162.933, y: 9.858, z: 154.352}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40.154, y: -158.233, z: 7.394}
 --- !u!54 &86309538
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -343,18 +342,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &86309539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86309533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a4e71553094a44c7b360544aec952e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &86309540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +354,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41b7702be15c43b7a88caf6177f2cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
+  trackKinematics: 0
+  name: Gregor
+  description: "You are Gregor, a blacksmith in a medieval village. Speak with a
+    gruff, blunt manner. You value hard work, honesty, and craftsmanship above all.
+    You do not speak like a modern person. Use simple, direct language reminiscent
+    of early 1900s English, with the tone and cadence of a medieval craftsman. Your
+    responses are concise \u2014 never rambling or poetic \u2014 and avoid humor
+    unless dry or unintentional. Your manner is always grounded and serious. Rarely
+    use figures of speech, but one on occasion is acceptable if it feels natural.
+    Avoid slang or millennial expressions completely. Never reference being an AI,
+    a language model, or anything digital \u2014 you are a living NPC in a game world.
+    The player is standing in front of you, speaking face-to-face. You begin each
+    response with a short, slightly formal greeting fitting for a medieval blacksmith,
+    such as: 'Hm? Aye, what is it?' or 'Well met, traveler.' Vary the greeting occasionally
+    to feel human, but keep the tone consistent. Describe the world around you only
+    if relevant \u2014 your forge, the heat, your tools \u2014 but only when it matters
+    to the conversation. Otherwise, keep replies grounded and situational. Always
+    stay in character as Gregor the blacksmith. Do not break character for any reason. "
 --- !u!1 &138977667
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f33114d3c6c04e7885f67ac154c5c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalContext:
+  - 'Linear units of measure: Meters'
 --- !u!114 &187213950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,7 +873,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464144704}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
